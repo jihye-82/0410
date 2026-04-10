@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🌈 어린이 학습 놀이터 🌈</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Round+Square:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --pink:    #FF6B9D;
+      --orange:  #FF9F4A;
+      --yellow:  #FFD93D;
+      --green:   #6BCB77;
+      --teal:    #4ECDC4;
+      --blue:    #4D96FF;
+      --purple:  #C77DFF;
+      --red:     #FF595E;
+      --bg:      #FFF8F0;
+      --dark:    #2D2D2D;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Jua', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── 배경 둥근 블롭 ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: -1;
+      background:
+        radial-gradient(ellipse 700px 500px at 10% 10%,  #FFE0F080 0%, transparent 70%),
+        radial-gradient(ellipse 600px 500px at 90% 20%,  #D0F0FF80 0%, transparent 70%),
+        radial-gradient(ellipse 500px 400px at 50% 85%,  #D5F5E380 0%, transparent 70%);
+    }
+
+    /* ── 헤더 ── */
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+      position: relative;
+    }
+
+    .header-cloud {
+      display: inline-block;
+      background: linear-gradient(135deg, #FF6B9D, #FF9F4A, #FFD93D, #6BCB77, #4D96FF, #C77DFF);
+      background-size: 300% 300%;
+      animation: rainbow-shift 4s ease infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: clamp(2rem, 6vw, 3.8rem);
+      line-height: 1.2;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+    }
+
+    @keyframes rainbow-shift {
+      0%   { background-position: 0% 50% }
+      50%  { background-position: 100% 50% }
+      100% { background-position: 0% 50% }
+    }
+
+    .header-sub {
+      font-family: 'Nanum Round Square', sans-serif;
+      font-size: 1.1rem;
+      color: #888;
+      margin-top: 8px;
+    }
+
+    .emoji-row {
+      font-size: 2rem;
+      margin-top: 10px;
+      animation: bounce 2s ease infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
+    }
+
+    /* ── 섹션 ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    .section {
+      margin-bottom: 48px;
+      animation: fade-up 0.6s ease both;
+    }
+    .section:nth-child(1) { animation-delay: 0.1s }
+    .section:nth-child(2) { animation-delay: 0.2s }
+    .section:nth-child(3) { animation-delay: 0.3s }
+    .section:nth-child(4) { animation-delay: 0.4s }
+    .section:nth-child(5) { animation-delay: 0.5s }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.6rem;
+      color: var(--dark);
+      padding: 8px 22px;
+      border-radius: 50px;
+      margin-bottom: 18px;
+      position: relative;
+    }
+    .section-title::before {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 50px;
+      opacity: 0.18;
+      z-index: -1;
+    }
+
+    /* 섹션 별 색상 */
+    .sec-art   .section-title { color: var(--pink);   }
+    .sec-art   .section-title::before { background: var(--pink); }
+    .sec-code  .section-title { color: var(--blue);   }
+    .sec-code  .section-title::before { background: var(--blue); }
+    .sec-quiz  .section-title { color: var(--purple); }
+    .sec-quiz  .section-title::before { background: var(--purple); }
+    .sec-meta  .section-title { color: var(--teal);   }
+    .sec-meta  .section-title::before { background: var(--teal); }
+    .sec-fun   .section-title { color: var(--orange); }
+    .sec-fun   .section-title::before { background: var(--orange); }
+
+    /* ── 버튼 그리드 ── */
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .btn-link {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 22px 14px;
+      border-radius: 24px;
+      font-family: 'Jua', sans-serif;
+      font-size: 1.15rem;
+      color: #fff;
+      text-align: center;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .btn-link::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: rgba(255,255,255,0.25);
+      transform: skewX(-20deg);
+      transition: left 0.4s ease;
+    }
+    .btn-link:hover::after { left: 150%; }
+    .btn-link:hover {
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.22);
+    }
+    .btn-link:active { transform: scale(0.97); }
+
+    .btn-icon { font-size: 2.4rem; line-height: 1; }
+    .btn-label { line-height: 1.3; word-break: keep-all; }
+    .btn-badge {
+      font-size: 0.65rem;
+      background: rgba(255,255,255,0.3);
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* 버튼 개별 색상 */
+    .c1  { background: linear-gradient(135deg, #FF6B9D, #FF9F4A); }
+    .c2  { background: linear-gradient(135deg, #FF9F4A, #FFD93D); }
+    .c3  { background: linear-gradient(135deg, #6BCB77, #4ECDC4); }
+    .c4  { background: linear-gradient(135deg, #4ECDC4, #4D96FF); }
+    .c5  { background: linear-gradient(135deg, #4D96FF, #C77DFF); }
+    .c6  { background: linear-gradient(135deg, #C77DFF, #FF6B9D); }
+    .c7  { background: linear-gradient(135deg, #FF595E, #FF9F4A); }
+    .c8  { background: linear-gradient(135deg, #FFD93D, #6BCB77); }
+    .c9  { background: linear-gradient(135deg, #4D96FF, #4ECDC4); }
+    .c10 { background: linear-gradient(135deg, #C77DFF, #4D96FF); }
+    .c11 { background: linear-gradient(135deg, #FF6B9D, #C77DFF); }
+    .c12 { background: linear-gradient(135deg, #6BCB77, #FFD93D); }
+    .c13 { background: linear-gradient(135deg, #4ECDC4, #6BCB77); }
+    .c14 { background: linear-gradient(135deg, #FF595E, #C77DFF); }
+    .c15 { background: linear-gradient(135deg, #4D96FF, #FF6B9D); }
+    .c16 { background: linear-gradient(135deg, #FFD93D, #FF595E); }
+    .c17 { background: linear-gradient(135deg, #6BCB77, #4D96FF); }
+
+    /* 메타버스 구분선 */
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 32px 0 24px;
+      font-size: 1.4rem;
+      color: #aaa;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ddd, transparent);
+    }
+
+    /* 푸터 */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.85rem;
+      color: #bbb;
+      font-family: 'Nanum Round Square', sans-serif;
+    }
+
+    /* 반응형 */
+    @media (max-width: 500px) {
+      .btn-grid { grid-template-columns: repeat(2, 1fr); }
+      .btn-link { font-size: 1rem; padding: 18px 10px; }
+      .btn-icon { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-cloud">🌈 어린이 학습 놀이터 🌈</div>
+  <p class="header-sub">버튼을 누르면 바로 연결돼요!</p>
+  <div class="emoji-row">⭐ 🚀 🎨 🎮 🌍 🎵 ⭐</div>
+</header>
+
+<main>
+
+  <!-- 🎨 창의 & 예술 -->
+  <section class="section sec-art">
+    <div class="section-title">🎨 창의 &amp; 예술</div>
+    <div class="btn-grid">
+      <a class="btn-link c1" href="https://musiclab.chromeexperiments.com/" target="_blank">
+        <span class="btn-icon">🎵</span>
+        <span class="btn-label">뮤직랩</span>
+        <span class="btn-badge">음악 실험실</span>
+      </a>
+      <a class="btn-link c2" href="https://www.autodraw.com/" target="_blank">
+        <span class="btn-icon">✏️</span>
+        <span class="btn-label">오토드로우</span>
+        <span class="btn-badge">AI 그림그리기</span>
+      </a>
+      <a class="btn-link c3" href="https://artsandculture.google.com/experiment/3d-pottery/nwHg1D0riJ1ltA" target="_blank">
+        <span class="btn-icon">🏺</span>
+        <span class="btn-label">3D 도자기</span>
+        <span class="btn-badge">도예 체험</span>
+      </a>
+      <a class="btn-link c4" href="https://seasonsinthemuseum.com/" target="_blank">
+        <span class="btn-icon">🌸</span>
+        <span class="btn-label">정원의 시간들</span>
+        <span class="btn-badge">아름다운 정원</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 💻 코딩 놀이 -->
+  <section class="section sec-code">
+    <div class="section-title">💻 코딩 놀이</div>
+    <div class="btn-grid">
+      <a class="btn-link c5" href="https://codly.co.kr/" target="_blank">
+        <span class="btn-icon">🤖</span>
+        <span class="btn-label">코들리</span>
+        <span class="btn-badge">블록 코딩</span>
+      </a>
+      <a class="btn-link c6" href="https://code.org/" target="_blank">
+        <span class="btn-icon">🚀</span>
+        <span class="btn-label">코딩 놀이터</span>
+        <span class="btn-badge">code.org</span>
+      </a>
+      <a class="btn-link c7" href="https://www.ebssw.kr/" target="_blank">
+        <span class="btn-icon">📺</span>
+        <span class="btn-label">이솦 코딩파티</span>
+        <span class="btn-badge">EBS 로그인 필요</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 🎯 퀴즈 & 게임 -->
+  <section class="section sec-quiz">
+    <div class="section-title">🎯 퀴즈 &amp; 게임</div>
+    <div class="btn-grid">
+      <a class="btn-link c8" href="https://quickdraw.withgoogle.com/?locale=ko" target="_blank">
+        <span class="btn-icon">🖌️</span>
+        <span class="btn-label">퀵드로우</span>
+        <span class="btn-badge">AI 낙서 게임</span>
+      </a>
+      <a class="btn-link c9" href="https://quiz.zep.us/play/r7LALZ/" target="_blank">
+        <span class="btn-icon">📖</span>
+        <span class="btn-label">속담 퀴즈</span>
+        <span class="btn-badge">ZEP 퀴즈</span>
+      </a>
+      <a class="btn-link c10" href="https://quiz.zep.us/play/GpRKam/" target="_blank">
+        <span class="btn-icon">✍️</span>
+        <span class="btn-label">맞춤법 퀴즈</span>
+        <span class="btn-badge">ZEP 퀴즈</span>
+      </a>
+      <a class="btn-link c11" href="https://zep.us/play/2bvnrj/" target="_blank">
+        <span class="btn-icon">❓</span>
+        <span class="btn-label">퀴즈 룸</span>
+        <span class="btn-badge">ZEP 퀴즈</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 🌍 메타버스 세계 -->
+  <section class="section sec-meta">
+    <div class="section-title">🌍 메타버스 세계</div>
+    <div class="btn-grid">
+      <a class="btn-link c12" href="https://zep.us/home/explore" target="_blank">
+        <span class="btn-icon">🗺️</span>
+        <span class="btn-label">ZEP 전체 탐험</span>
+        <span class="btn-badge">메타버스 광장</span>
+      </a>
+      <a class="btn-link c13" href="https://zep.us/play/2YAVRn" target="_blank">
+        <span class="btn-icon">🦕</span>
+        <span class="btn-label">공룡은 어디로?</span>
+        <span class="btn-badge">공룡 탐험</span>
+      </a>
+      <a class="btn-link c14" href="https://zep.us/play/875PwO" target="_blank">
+        <span class="btn-icon">🌿</span>
+        <span class="btn-label">순천만 정원</span>
+        <span class="btn-badge">박람회 체험</span>
+      </a>
+      <a class="btn-link c15" href="https://zep.us/play/YvpO6Y/" target="_blank">
+        <span class="btn-icon">🫀</span>
+        <span class="btn-label">몸속 탐험</span>
+        <span class="btn-badge">신체 과학</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 🎅 재미 특별관 -->
+  <section class="section sec-fun">
+    <div class="section-title">🎅 재미 특별관</div>
+    <div class="btn-grid">
+      <a class="btn-link c16" href="https://santatracker.google.com/intl/ko/" target="_blank">
+        <span class="btn-icon">🎅</span>
+        <span class="btn-label">산타 추적기</span>
+        <span class="btn-badge">산타 어디있니?</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  ⭐ 즐겁게 배우고 신나게 놀아요! 초등학교 1~6학년을 위한 학습 놀이터 ⭐
+</footer>
+
+</body>
+</html>
